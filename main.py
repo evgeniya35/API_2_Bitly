@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 from dotenv import load_dotenv, find_dotenv
 
 load_dotenv(find_dotenv())
-TOKEN = os.environ.get("TOKEN")
+BIT_TOKEN = os.environ.get("BIT_TOKEN")
 
 
 def shorten_link(token, url):
@@ -64,8 +64,8 @@ def main():
     parsed = urlparse(url)
     try:
         if is_bitlink(parsed.netloc):
-            if is_bitlink_api(TOKEN, parsed):
-                clicks = count_clicks(TOKEN, parsed.netloc + parsed.path)
+            if is_bitlink_api(BIT_TOKEN, parsed):
+                clicks = count_clicks(BIT_TOKEN, parsed.netloc + parsed.path)
                 print(f"{url} переходов: {clicks['total_clicks']}")
         else:
             bitlink = shorten_link(TOKEN, url)
