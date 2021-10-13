@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 def shorten_link(token, url):
     headers = {
-        "Authorization": "Bearer " + token
+        "Authorization": f"Bearer {token}"
     }
     options = {
         "long_url": url
@@ -24,7 +24,7 @@ def shorten_link(token, url):
 
 def count_clicks(token, short_url):
     headers = {
-        "Authorization": "Bearer " + token
+        "Authorization": f"Bearer {token}"
     }
     options = {
         "unit": "day",
@@ -38,18 +38,13 @@ def count_clicks(token, short_url):
     return response.json()['total_clicks']
 
 
-def is_bitlink(url):
-    return url == "bit.ly"
-
-
-def is_bitlink_api(token, parsed):
+def is_bitlink(token, url_parsed):
     headers = {
-        "Authorization": "Bearer " + token
+        "Authorization": f"Bearer {token}"
     }
     response = requests.get(
-        url=f"https://api-ssl.bitly.com/v4/bitlinks/{parsed.netloc}{parsed.path}",
+        url=f"https://api-ssl.bitly.com/v4/bitlinks/{url_parsed.netloc}{url_parsed.path}",
         headers=headers)
-    response.raise_for_status()
     return response.ok
 
 
@@ -59,17 +54,16 @@ def main():
     load_dotenv()
     BIT_TOKEN = os.environ.get("BIT_TOKEN")
     url = input()
-    parsed = urlparse(url)
+    url_parsed = urlparse(url)
     try:
-        if is_bitlink(parsed.netloc):
-            if is_bitlink_api(BIT_TOKEN, parsed):
-                clicks = count_clicks(BIT_TOKEN, parsed.netloc + parsed.path)
-                print(f"{url} переходов: {clicks}")
+        if is_bitlink(BIT_TOKEN, url_parsed):
+            clicks = count_clicks(BIT_TOKEN, f"{url_parsed.netloc}{url_parsed.path}")
+            print(f"{url} переходов: {clicks}")
         else:
             bitlink = shorten_link(BIT_TOKEN, url)
             print("Битлинк", bitlink)
     except requests.exceptions.HTTPError:
-        print("HTTPError in: " + url)
+        print(f"HTTPError in: {url}")
     except Exception as e:
         print(e, url)
     else:
