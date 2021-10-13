@@ -6,9 +6,6 @@ from urllib.parse import urlparse
 
 from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv())
-BIT_TOKEN = os.environ.get("BIT_TOKEN")
-
 
 def shorten_link(token, url):
     headers = {
@@ -60,6 +57,8 @@ def is_bitlink_api(token, parsed):
 def main():
     # url = "https://proglib.io/p/ne-izobretat-velosiped-ili-obzor-modulya-collections-v-python-2019-12-15"
     # url = "https://bit.ly/3DpixNc"
+    load_dotenv(find_dotenv())
+    BIT_TOKEN = os.environ.get("BIT_TOKEN")
     url = input()
     parsed = urlparse(url)
     try:
