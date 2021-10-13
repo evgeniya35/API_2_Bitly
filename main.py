@@ -63,7 +63,7 @@ def main():
         print(f"HTTPError in: {url}")
     except Exception as e:
         print(e, url)
-    
+
 
 if __name__ == "__main__":
     main()
