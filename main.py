@@ -1,6 +1,5 @@
 import os
 import requests
-from requests import exceptions
 from requests.exceptions import HTTPError
 from urllib.parse import urlparse
 
