@@ -17,7 +17,7 @@ pip install -r requirements.txt
 ## Запуск
 
 - Скачайте код: [https://github.com/evgeniya35/bitly_lesson2.git](https://github.com/evgeniya35/bitly_lesson2.git)
-- Запустите сайт командой:
+- Запустите программу командой:
 ```bash
 python main.py
 ```
