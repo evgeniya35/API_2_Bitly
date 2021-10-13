@@ -4,7 +4,7 @@ from requests import exceptions
 from requests.exceptions import HTTPError
 from urllib.parse import urlparse
 
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 
 
 def shorten_link(token, url):
@@ -19,7 +19,7 @@ def shorten_link(token, url):
         headers=headers,
         json=options)
     response.raise_for_status()
-    return response.json()
+    return response.json()["link"]
 
 
 def count_clicks(token, short_url):
@@ -35,7 +35,7 @@ def count_clicks(token, short_url):
         headers=headers,
         params=options)
     response.raise_for_status()
-    return response.json()
+    return response.json()['total_clicks']
 
 
 def is_bitlink(url):
@@ -50,14 +50,13 @@ def is_bitlink_api(token, parsed):
         url=f"https://api-ssl.bitly.com/v4/bitlinks/{parsed.netloc}{parsed.path}",
         headers=headers)
     response.raise_for_status()
-    bit = response.json()
-    return bit["id"] == parsed.netloc + parsed.path
+    return response.ok
 
 
 def main():
     # url = "https://proglib.io/p/ne-izobretat-velosiped-ili-obzor-modulya-collections-v-python-2019-12-15"
     # url = "https://bit.ly/3DpixNc"
-    load_dotenv(find_dotenv())
+    load_dotenv()
     BIT_TOKEN = os.environ.get("BIT_TOKEN")
     url = input()
     parsed = urlparse(url)
@@ -65,10 +64,10 @@ def main():
         if is_bitlink(parsed.netloc):
             if is_bitlink_api(BIT_TOKEN, parsed):
                 clicks = count_clicks(BIT_TOKEN, parsed.netloc + parsed.path)
-                print(f"{url} переходов: {clicks['total_clicks']}")
+                print(f"{url} переходов: {clicks}")
         else:
-            bitlink = shorten_link(TOKEN, url)
-            print("Битлинк", bitlink["link"])
+            bitlink = shorten_link(BIT_TOKEN, url)
+            print("Битлинк", bitlink)
     except requests.exceptions.HTTPError:
         print("HTTPError in: " + url)
     except Exception as e:
