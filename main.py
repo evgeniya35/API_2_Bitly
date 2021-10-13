@@ -49,8 +49,6 @@ def is_bitlink(token, url_parsed):
 
 
 def main():
-    # url = "https://proglib.io/p/ne-izobretat-velosiped-ili-obzor-modulya-collections-v-python-2019-12-15"
-    # url = "https://bit.ly/3DpixNc"
     load_dotenv()
     BIT_TOKEN = os.environ.get("BIT_TOKEN")
     url = input()
@@ -66,9 +64,7 @@ def main():
         print(f"HTTPError in: {url}")
     except Exception as e:
         print(e, url)
-    else:
-        pass
-
+    
 
 if __name__ == "__main__":
     main()
