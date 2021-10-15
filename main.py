@@ -61,8 +61,6 @@ def main():
             print("Битлинк", bitlink)
     except requests.exceptions.HTTPError:
         print(f"HTTPError in: {url}")
-    except Exception as e:
-        print(e, url)
 
 
 if __name__ == "__main__":
