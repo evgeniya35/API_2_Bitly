@@ -34,7 +34,7 @@ def count_clicks(token, short_url):
         headers=headers,
         params=options)
     response.raise_for_status()
-    return response.json()['total_clicks']
+    return response.json()["total_clicks"]
 
 
 def is_bitlink(token, url_components):
