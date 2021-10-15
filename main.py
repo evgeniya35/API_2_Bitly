@@ -37,12 +37,12 @@ def count_clicks(token, short_url):
     return response.json()['total_clicks']
 
 
-def is_bitlink(token, url_parsed):
+def is_bitlink(token, url_components):
     headers = {
         "Authorization": f"Bearer {token}"
     }
     response = requests.get(
-        url=f"https://api-ssl.bitly.com/v4/bitlinks/{url_parsed.netloc}{url_parsed.path}",
+        url=f"https://api-ssl.bitly.com/v4/bitlinks/{url_components.netloc}{url_components.path}",
         headers=headers)
     return response.ok
 
@@ -51,10 +51,10 @@ def main():
     load_dotenv()
     bit_token = os.environ.get("BIT_TOKEN")
     url = input()
-    url_parsed = urlparse(url)
+    url_components = urlparse(url)
     try:
-        if is_bitlink(bit_token, url_parsed):
-            clicks = count_clicks(bit_token, f"{url_parsed.netloc}{url_parsed.path}")
+        if is_bitlink(bit_token, url_components):
+            clicks = count_clicks(bit_token, f"{url_components.netloc}{url_components.path}")
             print(f"{url} переходов: {clicks}")
         else:
             bitlink = shorten_link(bit_token, url)
