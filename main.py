@@ -1,11 +1,9 @@
 import os
-
-import requests
-
-from dotenv import load_dotenv
-from requests.exceptions import HTTPError
 from urllib.parse import urlparse
 
+import requests
+from dotenv import load_dotenv
+from requests.exceptions import HTTPError
 
 
 def shorten_link(token, url):
