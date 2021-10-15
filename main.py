@@ -49,15 +49,15 @@ def is_bitlink(token, url_parsed):
 
 def main():
     load_dotenv()
-    BIT_TOKEN = os.environ.get("BIT_TOKEN")
+    bit_token = os.environ.get("BIT_TOKEN")
     url = input()
     url_parsed = urlparse(url)
     try:
-        if is_bitlink(BIT_TOKEN, url_parsed):
-            clicks = count_clicks(BIT_TOKEN, f"{url_parsed.netloc}{url_parsed.path}")
+        if is_bitlink(bit_token, url_parsed):
+            clicks = count_clicks(bit_token, f"{url_parsed.netloc}{url_parsed.path}")
             print(f"{url} переходов: {clicks}")
         else:
-            bitlink = shorten_link(BIT_TOKEN, url)
+            bitlink = shorten_link(bit_token, url)
             print("Битлинк", bitlink)
     except requests.exceptions.HTTPError:
         print(f"HTTPError in: {url}")
