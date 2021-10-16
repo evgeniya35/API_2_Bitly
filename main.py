@@ -1,3 +1,4 @@
+import argparse
 import os
 from urllib.parse import urlparse
 
@@ -50,7 +51,16 @@ def is_bitlink(token, url_components):
 def main():
     load_dotenv()
     bit_token = os.environ.get("BIT_TOKEN")
-    url = input()
+    parser = argparse.ArgumentParser(description="Launch parameters")
+    parser.add_argument(
+        "url",
+        type=str,
+        nargs='?',
+        default="https://google.com",
+        help="use python main.py {url} Default url: https://google.com"
+        )
+    args = parser.parse_args()
+    url = args.url
     url_components = urlparse(url)
     try:
         if is_bitlink(bit_token, url_components):
