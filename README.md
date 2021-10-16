@@ -13,7 +13,7 @@ Python должен быть установлен.
 ```bash
 pip install -r requirements.txt
 ```
-Пользователю необходимо зарегистрироваться на сайте и получить персональный токен. Токен поместить в файл `.env`:
+Пользователю необходимо зарегистрироваться на сайте [https://bitly.com](https://bitly.com) и получить персональный токен. Токен поместить в файл `.env`:
 ```
 BIT_TOKEN=ваш токен
 ```
@@ -24,9 +24,8 @@ BIT_TOKEN=ваш токен
 - Скачайте код: [https://github.com/evgeniya35/bitly_lesson2.git](https://github.com/evgeniya35/bitly_lesson2.git)
 - Запустите программу командой:
 ```bash
-python main.py
+python main.py https://dvmn.org
 ```
-- Введите в консоль адрес ссылки.
 
 ### Как работает
 
