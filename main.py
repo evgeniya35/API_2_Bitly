@@ -55,9 +55,7 @@ def main():
     parser.add_argument(
         "url",
         type=str,
-        nargs='?',
-        default="https://google.com",
-        help="use python main.py {url} Default url: https://google.com"
+        help="use python main.py {url}"
         )
     args = parser.parse_args()
     url = args.url
