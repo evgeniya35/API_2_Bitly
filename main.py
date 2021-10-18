@@ -1,4 +1,5 @@
 import argparse
+import logging
 import os
 from urllib.parse import urlparse
 
@@ -68,8 +69,10 @@ def main():
         else:
             bitlink = shorten_link(bit_token, url)
             print("Битлинк", bitlink)
-    except requests.exceptions.HTTPError:
-        print(f"HTTPError in: {url}")
+    except requests.exceptions.HTTPError as error:
+        print(f"HTTPError in: {url}: {error}")
+        logging.error(f" HTTPError in: {url}: {error}")
+
 
 
 if __name__ == "__main__":
