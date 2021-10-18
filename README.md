@@ -6,14 +6,7 @@
 
 Python должен быть установлен.
 
-## Установка зависимостей
-
-Используйте pip для установки зависимостей:
-```bash
-pip install -r requirements.txt
-```
-
-## Запуск
+## Установка скрипта
 
 - Скачайте код: [https://github.com/evgeniya35/bitly_lesson2.git](https://github.com/evgeniya35/bitly_lesson2.git), или клонируйте `git` репозиторий в локальную папку:
 ```
@@ -23,6 +16,16 @@ git clone https://github.com/evgeniya35/bitly_lesson2.git
 ```
 BIT_TOKEN=ваш токен
 ```
+
+## Установка зависимостей
+
+Используйте pip для установки зависимостей:
+```bash
+pip install -r requirements.txt
+```
+
+## Запуск
+
 - Запустите программу командой:
 ```bash
 python main.py {url}
