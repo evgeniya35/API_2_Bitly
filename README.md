@@ -1,6 +1,6 @@
 # Работа с сервисом bit.ly
 
-Программа работы с API сервиса сжатия(укорачивания) ссылок [https://bitly.com](https://bitly.com/a/sign_up)
+Программа работы с API сервиса сжатия(укорачивания) ссылок [https://bitly.com](https://bitly.com/a/sign_up).
 
 ## Окружение
 
