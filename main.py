@@ -38,12 +38,12 @@ def count_clicks(token, short_url):
     return response.json()["total_clicks"]
 
 
-def is_bitlink(token, url_components):
+def is_bitlink(token, url):
     headers = {
         "Authorization": f"Bearer {token}"
     }
     response = requests.get(
-        url=f"https://api-ssl.bitly.com/v4/bitlinks/{url_components.netloc}{url_components.path}",
+        url=f"https://api-ssl.bitly.com/v4/bitlinks/{url}",
         headers=headers)
     return response.ok
 
@@ -60,9 +60,10 @@ def main():
     args = parser.parse_args()
     url = args.url
     url_components = urlparse(url)
+    checked_url = f"{url_components.netloc}{url_components.path}"
     try:
-        if is_bitlink(bit_token, url_components):
-            clicks = count_clicks(bit_token, f"{url_components.netloc}{url_components.path}")
+        if is_bitlink(bit_token, checked_url):
+            clicks = count_clicks(bit_token, checked_url)
             print(f"{url} переходов: {clicks}")
         else:
             bitlink = shorten_link(bit_token, url)
