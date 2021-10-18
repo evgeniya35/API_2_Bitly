@@ -51,11 +51,11 @@ def is_bitlink(token, url_components):
 def main():
     load_dotenv()
     bit_token = os.environ.get("BIT_TOKEN")
-    parser = argparse.ArgumentParser(description="Launch parameters")
+    parser = argparse.ArgumentParser(description="Transform url to bitly link")
     parser.add_argument(
         "url",
         type=str,
-        help="use python main.py {url}"
+        help="use 'python main.py {url}'"
         )
     args = parser.parse_args()
     url = args.url
